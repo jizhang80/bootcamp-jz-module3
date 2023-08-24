@@ -53,6 +53,7 @@ function generatePassword() {
 
   while (!passwordObj.hasLowercase && !passwordObj.hasUppercase &&
             !passwordObj.hasNumeric && !passwordObj.hasSpecialChar) {
+    // at least one option true, if all false, then alert & repeat
     alert("Character Types: \n At least has one character type!")
     // lowercase 
     passwordObj.hasLowercase = confirm("Character Types: \nThe password has lowercase letter?");
@@ -63,8 +64,6 @@ function generatePassword() {
     // special characters
     passwordObj.hasSpecialChar = confirm("Character Types: \nThe password has special characters?");
   }
-    // at least one option true, if all false, then repeat
-
   return passwordObj.getPassword();
 }
 
