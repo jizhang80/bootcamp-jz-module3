@@ -22,7 +22,7 @@ function swapArray(inputArray, idx) {
 }
 
 function shuffleStr(inputStr) {
-  // shuffle input String
+  // random shuffle input String
   let arr = inputStr.split('');// transfer input string to array
   let shuffledStr = '';
   while (arr.length > 0) {
