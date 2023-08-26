@@ -1,6 +1,37 @@
 // Assignment code here
 function getRandomNumber(numberRange) {
+  //return a random number in the range number
   return Math.floor(Math.random()*numberRange);
+}
+
+function getRandomChar(baseStr) {
+  // return one of the random char of the baseStr
+  let idx = getRandomNumber(baseStr.length);
+  return baseStr[idx];
+}
+
+function swapArray(inputArray, idx) {
+  // swap inputStr[idx] to the end
+  if (inputArray.length > 1) {
+    let temp = '';
+    temp = inputArray[idx];
+    inputArray[idx] = inputArray[inputArray.length-1];
+    inputArray[inputArray.length-1] = temp;
+  }
+  return;
+}
+
+function shuffleStr(inputStr) {
+  // shuffle input String
+  let arr = inputStr.split('');
+  let shuffledStr = '';
+  while (arr.length > 0) {
+    swapArray(arr, getRandomNumber(arr.length));
+    shuffledStr += arr.pop();
+    console.log(shuffledStr);
+  }
+  console.log(inputStr)
+  return shuffledStr;
 }
 
 let passwordObj = {
@@ -17,29 +48,44 @@ let passwordObj = {
     const specialChar = ' !"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~';
     let base = '';
   
-    if (this.hasLowercase) base = base + letters;
-    if (this.hasUppercase) base = base + upperCaseLetters;
-    if (this.hasNumeric)   base = base + numbers;
-    if (this.hasSpecialChar) base = base + specialChar;
-  
-    for (let i = 0; i < this.pwLength; i++) {
-      let idx = getRandomNumber(base.length);
-      password = password + base[idx];
+    // add charactor types to base string, 
+    // and make sure at least one of the choosen type in the password
+    if (this.hasLowercase) {
+      base += letters;
+      password += getRandomChar(letters);
     }
-    return password;
-  }// end of getPassword()
-}
+    if (this.hasUppercase) {
+      base += upperCaseLetters;
+      password += getRandomChar(upperCaseLetters);
+    }
+    if (this.hasNumeric) {
+      base += numbers;
+      password += getRandomChar(numbers);
+    }  
+    if (this.hasSpecialChar) {
+      base += specialChar;
+      password += getRandomChar(specialChar);
+    }
+  
+    for (let i = 0; i < (this.pwLength - password.length); i++) {
+      password += getRandomChar(base);
+    }
 
+    //shuffle final password
+    return shuffleStr(password);
+  },// end of getPassword()
 
-function askCharacterTypesQuestion() {
-  // lowercase 
-  passwordObj.hasLowercase = confirm("Character Types: \nThe password has lowercase letter?");
-  // uppercase 
-  passwordObj.hasUppercase = confirm("Character Types: \nThe password has uppercase letter?");
-  // numeric
-  passwordObj.hasNumeric = confirm("Character Types: \nThe password has numeric?");
-  // special characters
-  passwordObj.hasSpecialChar = confirm("Character Types: \nThe password has special characters?");
+  askCharacterTypesQuestion() {
+    // lowercase 
+    this.hasLowercase = confirm("Character Types: \nThe password has lowercase letter?");
+    // uppercase 
+    this.hasUppercase = confirm("Character Types: \nThe password has uppercase letter?");
+    // numeric
+    this.hasNumeric = confirm("Character Types: \nThe password has numeric?");
+    // special characters
+    this.hasSpecialChar = confirm("Character Types: \nThe password has special characters?");
+    return;
+  }
 }
 
 
@@ -59,7 +105,7 @@ function generatePassword() {
       // if type error, then alert
       alert("Character Types: \n At least has one character type!")
     }
-    askCharacterTypesQuestion();
+    passwordObj.askCharacterTypesQuestion();
     j++;
   } while (!passwordObj.hasLowercase && !passwordObj.hasUppercase &&
             !passwordObj.hasNumeric && !passwordObj.hasSpecialChar)
