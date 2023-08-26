@@ -2,19 +2,18 @@
 
 ## live link URL
 
-TODO
+https://jizhang80.github.io/bootcamp-jz-module3/
 
 ## function introduction
 
-TODO
-
-## checklist
-
-TODO
+1. After click the "Generate Password", it will be asked the length of the password.
+    * if the length of the password less than 8 or greater than 128, or user input non-number string, then this question will repeat.
+2. After that, it will be asked several YES/NO questions about Character Types. 
+    * If all the questions is "Cancel", then it will response an "Alert" that "At least has one Character types", then ask all the questions again.
 
 ## screenshot
 
-TODO
+![Screenshot](./screenshot.jpg)
 
 ## User Story
 ```
