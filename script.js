@@ -28,9 +28,7 @@ function shuffleStr(inputStr) {
   while (arr.length > 0) {
     swapArray(arr, getRandomNumber(arr.length));
     shuffledStr += arr.pop();
-    console.log(shuffledStr);
   }
-  console.log(inputStr)
   return shuffledStr;
 }
 
@@ -66,8 +64,9 @@ let passwordObj = {
       base += specialChar;
       password += getRandomChar(specialChar);
     }
-  
-    for (let i = 0; i < (this.pwLength - password.length); i++) {
+    
+    let rest = this.pwLength - password.length
+    for (let i = 0; i < rest; i++) {
       password += getRandomChar(base);
     }
 
