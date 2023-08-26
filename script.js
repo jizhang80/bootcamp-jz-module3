@@ -23,11 +23,11 @@ function swapArray(inputArray, idx) {
 
 function shuffleStr(inputStr) {
   // shuffle input String
-  let arr = inputStr.split('');
+  let arr = inputStr.split('');// transfer input string to array
   let shuffledStr = '';
   while (arr.length > 0) {
     swapArray(arr, getRandomNumber(arr.length));
-    shuffledStr += arr.pop();
+    shuffledStr += arr.pop(); // performance consideration, swap char to the end, then pop
   }
   return shuffledStr;
 }
@@ -70,7 +70,7 @@ let passwordObj = {
       password += getRandomChar(base);
     }
 
-    //shuffle final password
+    //shuffle final password, avoid fixed pattern
     return shuffleStr(password);
   },// end of getPassword()
 
